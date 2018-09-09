@@ -8,7 +8,7 @@ class Search extends Component {
       time: null
     }
     this.interval = null
-    console.log(props, 'CONSTRUCTOR');
+    // console.log(props, 'CONSTRUCTOR');
   }
 
   // static getDerivedStateFromProps(p) {
@@ -17,7 +17,7 @@ class Search extends Component {
   // }
 
   shouldComponentUpdate(p) {
-    console.log('shouldComponentUpdate', p)
+    // console.log('shouldComponentUpdate', p)
     if(p.title.length > 4) {
       return false
     }
@@ -25,7 +25,7 @@ class Search extends Component {
   }  
 
   componentDidMount() {
-    console.log('componentDidMount');
+    // console.log('componentDidMount');
 
     this.interval = setInterval(() => {
       let {count} = this.state; // destructuring
@@ -37,14 +37,14 @@ class Search extends Component {
   }
 
   componentDidUpdate() {
-    console.log('componentDidUpdate')
+    // console.log('componentDidUpdate')
     if(this.state.count === 10) {
       clearInterval(this.interval)
     }
   }
 
   render() {
-    console.log('RENDER ', this.state.count)
+    // console.log('RENDER ', this.state.count)
     return (
       <div>
         <h1>Search Component - {this.props.title}</h1>
