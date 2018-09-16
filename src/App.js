@@ -3,28 +3,8 @@ import './App.css';
 import Search from './components/Search/Search'
 import List from './components/List/List';
 import ListItem from './components/ListItem/ListItem';
-
-const ListObj = [
-  { title: "AAA", rating: 4},
-  { title: "BBB", rating: 4.4},
-  { title: "CCC", rating: 3},
-  { title: "DDD", rating: 4.2},
-  { title: "EEE", rating: 2.5},
-]
-
-const ListObj2 = [
-  { title: "XXX", rating: 4},
-  { title: "YYY", rating: 4.4},
-  { title: "NNNN", rating: 3},
-  { title: "NNNN", rating: 3},
-  { title: "YYY", rating: 4.4},
-  { title: "NNNN", rating: 3},
-  { title: "NNNN", rating: 3},
-  { title: "MMM", rating: 4.2},
-  { title: "MMM", rating: 4.2},
-  { title: "DDDDDD", rating: 2.5},
-  { title: "DDDDDD", rating: 2.5},
-]
+import { TRENDING, TOP_RATED, UPCOMING } from './constants/api';
+import SearchResults from './components/SearchResults/SearchResults';
 
 class App extends Component {
   // state object is immutable
@@ -41,18 +21,31 @@ class App extends Component {
     }
   }
 
+  onSearch = (res) => {
+    console.log(res)
+    this.setState({
+      ...res
+    })
+  }
+
   render() {
     return (
-      <div className="App">
+      <div className="App container">
         <header className="App-header">
           <h1 className="App-title">Movies Corner</h1>
         </header>
-        <input type="text" value={this.state.title} onChange={ this.changeTitle } />
-        <Search title={this.state.title} />
-        <List title="Trending Movies" url="/trending/all/day" deal={true} />
-        <List title="Top Rated Movies" url="/movie/top_rated"/>
-        <List title="Upcoming Movies" url="/movie/upcoming" />
-        <ListItem title="Sample Content" rating="5" />
+        <Search title={this.state.title} onSearch={this.onSearch} />
+        {
+          this.state.results ? 
+            <SearchResults results={this.state.results} total={this.state.total} />
+          :
+          <React.Fragment>
+            <List title="Trending Movies" url={TRENDING} deal={true} />
+            <List title="Top Rated Movies" url={TOP_RATED} />
+            <List title="Upcoming Movies" url={UPCOMING} />
+          </React.Fragment>
+
+        }
       </div>
     );
   }

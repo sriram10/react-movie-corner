@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import ListItem from '../ListItem/ListItem'
 import './List.css'
+import { API_KEY, moviesAPI } from '../../constants/api';
 
 class List extends Component {
 
@@ -23,17 +24,12 @@ class List extends Component {
   }
 
   componentDidMount() {
-    const API = 'https://api.themoviedb.org/3'
-    const KEY = '?api_key=YOUR_API_KEY'
-
-    this.props.url && fetch(API + this.props.url + KEY)
-      .then(result => {
-        return result.json()
-      })
+    
+    this.props.url && moviesAPI.get(this.props.url)
       .then(res => {
         console.log(res)
         this.setState({
-          data: res.results.slice(0,8)
+          data: res.data.results.slice(0,8)
         })
       })
       .catch(err => {
