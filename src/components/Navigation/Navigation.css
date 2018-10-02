@@ -1,0 +1,29 @@
+.main-menu {
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  display: block;
+  background-color: #333;
+}
+.main-menu > li {
+  list-style: none;
+  display: inline-block;
+}
+.main-menu > li > a {
+  padding: 8px 12px;
+  margin: 0;
+  display: block;
+  text-decoration: none;
+  font-size: 1.1em;
+  text-shadow: 1px 1px 2px #000;
+  border-top: 2px solid #333;
+  color: #fafafa;
+  text-align: center;
+  transition: all .25s ease-in-out;
+}
+
+.main-menu > li > a:hover {
+  color: #fff;
+  background-color: #222;
+  border-top-color: #f1f1f1;
+}

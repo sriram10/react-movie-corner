@@ -13,10 +13,11 @@ class App extends Component {
       <BrowserRouter>
         <div className="App container">
           <header className="App-header">
-            <h1 className="App-title">Movies Corner</h1>
+            <div className="App-title">
+              <h1>Movies Corner</h1>
+            </div>
             <Navigation />
           </header>
-            <Route path="/" exact component={Home}/>
           <Switch>
             <Route path="/trending" render={() => <h1>TRENDING</h1>} />
             <Route path="/contact" render={() => <h1>CONTACT</h1>} />
@@ -28,9 +29,10 @@ class App extends Component {
 
             <Route path="/movie/:movieid" component={(routeObj) => <Movie text="SOME PROPS" {...routeObj} />} />
 
-            <Redirect from="/home" to="/" />
-            {/* <Redirect from="*" to="/" /> */}
+            <Route path="/" exact component={Home}/>
 
+            <Redirect from="/home" to="/" />
+            
             <Route render={() => <h1>404: Page Not Found</h1>} />
           </Switch>
         </div>
