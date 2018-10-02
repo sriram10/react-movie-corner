@@ -25,20 +25,29 @@
     border: 1px solid #666;
     margin-right: 15px;
     margin-bottom: 15px;
-    min-height: 150px;
-    min-width: 100px;
-    max-width: 150px;
+    min-height: 200px;
+    min-width: 125px;
+    max-width: 200px;
     color: #f1f1f1;
     background-color: #333;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     vertical-align: top;
-
+    box-shadow: 1px 2px 3px #666666;
+    position: relative;
 }
 .movie:hover {
     background-color: #444;
 }
 .movie.hi {
     background-color: #dd4444;
+}
+.movie-title {
+    position: absolute;
+    bottom: 0;
+    left:0;
+    right: 0;
+    padding: 3px;
+    background: rgba(0,0,0,.5);
 }

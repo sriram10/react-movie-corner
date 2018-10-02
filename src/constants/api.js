@@ -7,6 +7,7 @@ export const TRENDING = "/trending/all/day"
 export const TOP_RATED = "/movie/top_rated"
 export const UPCOMING = "/movie/upcoming"
 export const SEARCH = "/search/movie"
+export const GET_MOVIE = "/movie/"
 
 
 export const moviesAPI = Axios.create({

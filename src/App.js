@@ -1,52 +1,40 @@
 import React, { Component } from 'react';
 import './App.css';
-import Search from './components/Search/Search'
-import List from './components/List/List';
-import ListItem from './components/ListItem/ListItem';
-import { TRENDING, TOP_RATED, UPCOMING } from './constants/api';
-import SearchResults from './components/SearchResults/SearchResults';
+import Home from './components/Home/Home';
+import About from './components/About/About';
+import Movie from './components/Movie/Movie';
+import Navigation from './components/Navigation/Navigation';
+
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 
 class App extends Component {
-  // state object is immutable
-  state = {
-    title: ""
-  }
-
-  changeTitle = (e) => {
-    let val = e.target.value;
-    if(isNaN(val)) {
-      this.setState({
-        title: val
-      })
-    }
-  }
-
-  onSearch = (res) => {
-    console.log(res)
-    this.setState({
-      ...res
-    })
-  }
-
   render() {
     return (
-      <div className="App container">
-        <header className="App-header">
-          <h1 className="App-title">Movies Corner</h1>
-        </header>
-        <Search title={this.state.title} onSearch={this.onSearch} />
-        {
-          this.state.results ? 
-            <SearchResults results={this.state.results} total={this.state.total} />
-          :
-          <React.Fragment>
-            <List title="Trending Movies" url={TRENDING} deal={true} />
-            <List title="Top Rated Movies" url={TOP_RATED} />
-            <List title="Upcoming Movies" url={UPCOMING} />
-          </React.Fragment>
+      <BrowserRouter>
+        <div className="App container">
+          <header className="App-header">
+            <h1 className="App-title">Movies Corner</h1>
+            <Navigation />
+          </header>
+            <Route path="/" exact component={Home}/>
+          <Switch>
+            <Route path="/trending" render={() => <h1>TRENDING</h1>} />
+            <Route path="/contact" render={() => <h1>CONTACT</h1>} />
+            
+            <Route path="/about/a/b/c" render={() => <h2>Some Other Component 3</h2>} />
+            <Route path="/about/a/b" render={() => <h2>Some Other Component 2</h2>} />
+            <Route path="/about/a" render={() => <h2>Some Other Component 1</h2>} />
+            <Route path="/about" component={About} />
 
-        }
-      </div>
+            <Route path="/movie/:movieid" component={(routeObj) => <Movie text="SOME PROPS" {...routeObj} />} />
+
+            <Redirect from="/home" to="/" />
+            {/* <Redirect from="*" to="/" /> */}
+
+            <Route render={() => <h1>404: Page Not Found</h1>} />
+          </Switch>
+        </div>
+      </BrowserRouter>
     );
   }
 }
